@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Survey Form</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <h1>Survey</h1>
+    <form action="/result" method="post">
+    <div id="name">
+      <label>Name: </label>
+      <input type="text" name="name" id="">
+    </div>
+    <div id="location">
+      <label>HomeBase: </label>
+      <select name="home_base">
+        <option value="Earls on the Ave">Earls on the Ave</option>
+        <option value="Ohana">Ohana</option>
+        <option value="Tig">Tig</option>
+        <option value="Cafe on the Ave">Cafe on the Ave</option>
+      </select>
+    </div>
+    <div id="language">
+      <label>Favorite Drink: </label>
+      <select name="favorite_drink">
+        <option value="Bud Light">Bud Light</option>
+        <option value="Soj">Soj</option>
+        <option value="Heineken">Heineken</option>
+        <option value="Jameson">Jameson</option>
+      </select>
+    </div>
+    <div id="comment">
+      <label>Comment (optional):</label>
+      <textarea name="comment"></textarea>
+    </div>
+    <input type="submit" value="Submit">
+    </form>
+  </div>
+  </body>
+</html>
