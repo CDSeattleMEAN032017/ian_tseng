@@ -1,0 +1,5 @@
+*.zip
+PythonDojo/myenvironments/*
+bin/
+*.pyc
+node_modules/
