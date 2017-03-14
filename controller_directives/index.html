@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <title>Controllers and Directives</title>
+    <script src = 'node_modules/angular/angular.js'></script>
+    <script>
+      var app = angular.module('app', []);
+      app.controller('foodController', ['$scope', function($scope) {
+        // initialize food array
+        $scope.whatupworld = "WHATUP WORLD"
+        $scope.foods = [];
+        // function that adds food input to food array
+        $scope.addFood = function() {
+          // push food input into foods array
+          $scope.foods.push($scope.food);
+          // resets food input to empty field
+          $scope.food = "";
+        }
+      }])
+
+    </script>
+  </head>
+  <body>
+    <div ng-controller='foodController'>
+      <form ng-submit='addFood()'>
+        <input type="text" ng-model="food">
+        <input type="submit" value="Add">
+      </form>
+      <hr>
+      <label>Search:
+        <input ng-model="search">
+      </label>
+      <div ng-repeat="food in foods | filter:search">
+        <p>{{ food }}</p>
+      </div>
+      <p ng-if='food'>Currently typing: {{ food }}</p>
+      <hr>
+      <div ng-hide="food">WHATUP</div>
+      <div ng-show="food">WORLD</div>
+    </div>
+  </body>
+</html>
