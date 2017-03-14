@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <title>Controlling Users</title>
+    <script src='/angular/angular.js'></script>
+    <script>
+      var app = angular.module('app', []);
+      app.controller('userController', ['$scope', function($scope) {
+        $scope.users = [
+          {name: 'Ian',beer:'BudLight'},
+          {name: 'Jack',beer:'Heineken'},
+          {name: 'Taylor',beer:'Sapporo'},
+          {name: 'Jace',beer:'Milk'},
+          {name: 'Evee',beer:'Water'}
+        ]
+        $scope.addUser = function() {
+          $scope.users.push( {
+            name:$scope.user.name,
+            beer:$scope.user.beer
+          });
+          $scope.user.name = '';
+          $scope.user.beer = '';
+        }
+        $scope.removeUser = function(user) {
+          var index = $scope.users.indexOf(user);
+          $scope.users.splice(index,1);
+        }
+      }])
+    </script>
+  </head>
+  <body>
+    <div ng-controller='userController'>
+      <form ng-submit='addUser()'>
+        <input type="text" placeholder="Name" value="" ng-model="user.name">
+        <input type="text" placeholder="Favorite Beer" value="" ng-model="user.beer">
+        <input type="submit" name="" value="Create User">
+      </form>
+      <hr>
+      <label>Search:
+        <input ng-model="search">
+      </label>
+      <table>
+      <tr>
+        <th>Name - </th>
+        <th>Favorite Beer - </th>
+        <th>Date - </th>
+        <th>Action</th>
+      </tr>
+      <tr ng-repeat="user in users | filter:search | orderBy: 'name'">
+        <td>{{ user.name }}</td>
+        <td>{{ user.beer }}</td>
+        <th></th>
+        <td><button ng-click="removeUser(user)">Delete</button></td>
+      </tr>
+      </table>
+      <hr>
+    </div>
+  </body>
+</html>
