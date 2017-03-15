@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src='node_modules/angular/angular.js'></script>
+    <script src='app.js'></script>
+    <script type="text/javascript" src='./controllers/products.js'></script>
+    <script type="text/javascript" src='./controllers/orders.js'></script>
+    <script type="text/javascript" src='./factories/products.js'></script>
+    <title>Product Page</title>
+  </head>
+  <body>
+    <div class="container">
+      <div ng-controller='productController'>
+        <h1 style="font-family: 'Brush Script MT', cursive; font-size: 48px">Product Page</h1>
+        <hr>
+        <form ng-submit='add()'>
+          <input type="text" ng-model='newProduct.name' placeholder="Product">
+          <input type="number" step="any "ng-model='newProduct.price' placeholder="Price">
+          <input class="btn btn-success btn-sm"type="submit" name="" value="Add">
+        </form>
+        <hr>
+        <input ng-model="search" placeholder="Search Products">
+        <hr>
+        <h3>Products Controller</h3>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th ng-click="sortBy = 'name'; sortReverse = !sortReverse">Product</th>
+              <th ng-click="sortBy = 'price'; sortReverse = !sortReverse"> Price</th>
+              <th ng-click="sortBy = 'date_added'; sortReverse = !sortReverse">Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="product in products | filter:search | orderBy:sortBy:sortReverse ">
+              <td>{{ product.name }}</td>
+              <td>{{ product.price | currency }}</td>
+              <td>{{ product.date_added | date:'medium'}}</td>
+              <td><button class="btn btn-danger btn-xs"ng-click="remove($index)">Delete Product</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+      </div>
+      <div ng-controller='orderController'>
+        <h3>Orders Controller</h3>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th ng-click="sortBy = 'name'; sortReverse = !sortReverse">Product</th>
+              <th ng-click="sortBy = 'price'; sortReverse = !sortReverse"> Price</th>
+              <th ng-click="sortBy = 'quant'; sortReverse = !sortReverse">Quantity</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="product in products | filter:search | orderBy:sortBy:sortReverse ">
+              <td>{{ product.name }}</td>
+              <td>{{ product.price | currency }}</td>
+              <td>{{ product.quant }}</td>
+              <td><button class="btn btn-success btn-xs"ng-click="buy($index)">Buy</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
