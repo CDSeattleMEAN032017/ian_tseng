@@ -1,0 +1,25 @@
+<hr>
+<form ng-submit='create()'>
+  <input type="text" ng-model='newPlayer.player_name' placeholder="Player Name">
+  <input class="btn btn-success btn-sm"type="submit" name="" value="Add Player">
+</form>
+<hr>
+  <input ng-model="search" placeholder="Search Users">
+<hr>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th ng-click="sortBy = 'player_name'; sortReverse = !sortReverse">Player Name</th>
+        <th ng-click="sortBy = 'date_added'; sortReverse = !sortReverse">Date Joined</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="player in players | filter:search | orderBy:sortBy:sortReverse ">
+        <td>{{ player.player_name }}</td>
+        <td>{{ player.date_added | date:'medium' }}</td>
+        <td><button class="btn btn-danger btn-xs"ng-click="delete($index)">Remove Player</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>

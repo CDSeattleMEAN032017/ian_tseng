@@ -1,0 +1,30 @@
+<hr>
+<form ng-submit='create()'>
+  <select ng-model='newAss.playerIndex'>
+    <option ng-repeat="player in players" value="{{$index}}">{{player.player_name}}</option>
+  </select>
+  <select ng-model="newAss.team_name">
+    <option ng-repeat="team in teams" value="{{team.team_name}}">{{team.team_name}}</option>
+  </select>
+  <input class="btn btn-success btn-xs"type="submit" name="" value="Join Team">
+</form>
+<hr>
+  <input ng-model="search" placeholder="Search Users">
+<hr>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th ng-click="sortBy = 'player_name'; sortReverse = !sortReverse">Player Name</th>
+        <th ng-click="sortBy = 'team_name'; sortReverse = !sortReverse">Team Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="player in players | filter:search | orderBy:sortBy:sortReverse ">
+        <td>{{ player.player_name }}</td>
+        <td>{{ player.team_name }}</td>
+        <td><button class="btn btn-danger btn-xs"ng-click="delete($index)">Clear Assignment</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
